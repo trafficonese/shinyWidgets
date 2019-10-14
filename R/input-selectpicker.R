@@ -241,6 +241,7 @@ pickerInput <- function(inputId, label = NULL, choices, selected = NULL, multipl
     class = divClass,
     style = if (!is.null(width)) paste0("width: ", validateCssUnit(width), ";"),
     if (!is.null(label)) tags$label(class = labelClass, `for` = inputId, label),
+    if (!is.null(label) & !inline) tags$br(),
     selectTag
   )
   # Deps
