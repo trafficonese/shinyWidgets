@@ -63,7 +63,8 @@ var pickerInputBinding = new Shiny.InputBinding();
     },
     subscribe: function subscribe(el, callback) {
       $(el).on('changed.bs.select', function (event) {
-        $(el).selectpicker('refresh');
+        console.log("changed.bs.select call refresh");
+        //$(el).selectpicker('refresh');
         callback();
       });
     },
