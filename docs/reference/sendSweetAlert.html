@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shinyWidgets</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -117,9 +117,18 @@
     <p>Send a message from the server and launch a sweet alert in the UI.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sendSweetAlert</span>(<span class='no'>session</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Title"</span>, <span class='kw'>text</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>btn_labels</span> <span class='kw'>=</span> <span class='st'>"Ok"</span>, <span class='kw'>btn_colors</span> <span class='kw'>=</span> <span class='st'>"#3085d6"</span>, <span class='kw'>html</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>closeOnClickOutside</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>showCloseButton</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>sendSweetAlert</span>(
+  <span class='no'>session</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Title"</span>,
+  <span class='kw'>text</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>btn_labels</span> <span class='kw'>=</span> <span class='st'>"Ok"</span>,
+  <span class='kw'>btn_colors</span> <span class='kw'>=</span> <span class='st'>"#3085d6"</span>,
+  <span class='kw'>html</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>closeOnClickOutside</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>showCloseButton</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,8 +182,7 @@ the modal by clicking outside of it, or not.</p></td>
     <div class='dont-index'><p><code><a href='confirmSweetAlert.html'>confirmSweetAlert</a></code>, <code><a href='inputSweetAlert.html'>inputSweetAlert</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
 
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>shiny</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>shinyWidgets</span>)
@@ -285,7 +293,6 @@ the modal by clicking outside of it, or not.</p></td>
   }
 )
 
-}
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -306,7 +313,7 @@ the modal by clicking outside of it, or not.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

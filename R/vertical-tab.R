@@ -161,7 +161,11 @@ verticalTabsetPanel <- function(..., selected = NULL, id = NULL, color = "#11244
     htmltools::htmlDependency(
       name = "vertical-tab",
       version = "0.1.0",
-      src = c(href="shinyWidgets/vertical-tab-panel"),
+      src = c(
+        href = "shinyWidgets/vertical-tab-panel",
+        file = "assets/vertical-tab-panel"
+      ),
+      package = "shinyWidgets",
       script = c("vertical-tab-panel.js", "vertical-tab-panel-bindings.js"),
       stylesheet = "vertical-tab-panel.css"
     ),
@@ -182,7 +186,8 @@ verticalTabsetPanel <- function(..., selected = NULL, id = NULL, color = "#11244
 #' @rdname vertical-tab
 verticalTabPanel <- function(title, ..., value = title, icon = NULL, box_height = "160px") {
   tabbox <- tags$a(
-    href="#", class="list-group-item text-center",
+    class="list-group-item text-center",
+    style = "cursor: pointer;",
     style = if (!is.null(box_height)) paste("height:", box_height),
     `data-value` = value, `data-toggle` = "tab",
     if (!is.null(icon)) tags$h4(icon),
