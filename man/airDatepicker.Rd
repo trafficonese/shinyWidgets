@@ -8,20 +8,45 @@
 \alias{airYearpickerInput}
 \title{Air Date Picker Input}
 \usage{
-airDatepickerInput(inputId, label = NULL, value = NULL,
-  multiple = FALSE, range = FALSE, timepicker = FALSE,
-  separator = " - ", placeholder = NULL, dateFormat = "yyyy-mm-dd",
-  minDate = NULL, maxDate = NULL, disabledDates = NULL,
-  view = c("days", "months", "years"), minView = c("days", "months",
-  "years"), monthsField = c("monthsShort", "months"),
-  clearButton = FALSE, todayButton = FALSE, autoClose = FALSE,
-  timepickerOpts = timepickerOptions(), position = NULL,
-  update_on = c("change", "close"), addon = c("right", "left", "none"),
-  language = "en", inline = FALSE, width = NULL)
+airDatepickerInput(
+  inputId,
+  label = NULL,
+  value = NULL,
+  multiple = FALSE,
+  range = FALSE,
+  timepicker = FALSE,
+  separator = " - ",
+  placeholder = NULL,
+  dateFormat = "yyyy-mm-dd",
+  minDate = NULL,
+  maxDate = NULL,
+  disabledDates = NULL,
+  view = c("days", "months", "years"),
+  startView = NULL,
+  minView = c("days", "months", "years"),
+  monthsField = c("monthsShort", "months"),
+  clearButton = FALSE,
+  todayButton = FALSE,
+  autoClose = FALSE,
+  timepickerOpts = timepickerOptions(),
+  position = NULL,
+  update_on = c("change", "close"),
+  addon = c("right", "left", "none"),
+  language = "en",
+  inline = FALSE,
+  width = NULL
+)
 
-timepickerOptions(dateTimeSeparator = NULL, timeFormat = NULL,
-  minHours = NULL, maxHours = NULL, minMinutes = NULL,
-  maxMinutes = NULL, hoursStep = NULL, minutesStep = NULL)
+timepickerOptions(
+  dateTimeSeparator = NULL,
+  timeFormat = NULL,
+  minHours = NULL,
+  maxHours = NULL,
+  minMinutes = NULL,
+  maxMinutes = NULL,
+  hoursStep = NULL,
+  minutesStep = NULL
+)
 
 airMonthpickerInput(inputId, label = NULL, value = NULL, ...)
 
@@ -35,7 +60,8 @@ airYearpickerInput(inputId, label = NULL, value = NULL, ...)
 \item{value}{Initial value(s), dates as character string are accepted in \code{yyyy-mm-dd} format,
 or Date/POSIXct object. Can be a single value or several values.}
 
-\item{multiple}{Select multiple dates.}
+\item{multiple}{Select multiple dates. If \code{TRUE}, then one can select unlimited dates.
+If \code{numeric} is passed, then amount of selected dates will be limited by it.}
 
 \item{range}{Select a date range.}
 
@@ -55,6 +81,8 @@ or Date/POSIXct object. Can be a single value or several values.}
 
 \item{view}{Starting view, one of \code{'days'} (default), \code{'months'} or \code{'years'}.}
 
+\item{startView}{Date shown in calendar when date picker is openned.}
+
 \item{minView}{Minimal view, one of \code{'days'} (default), \code{'months'} or \code{'years'}.}
 
 \item{monthsField}{Names for the months when view is 'months',
@@ -62,7 +90,8 @@ use \code{'monthsShort'} for abbreviations or \code{'months'} for full names.}
 
 \item{clearButton}{If \code{TRUE}, then button "Clear" will be visible.}
 
-\item{todayButton}{If \code{TRUE}, then button "Today" will be visible.}
+\item{todayButton}{If \code{TRUE}, then button "Today" will be visible to set view to current date,
+if a \code{Date} is used, it will set view to the given date and select it..}
 
 \item{autoClose}{If \code{TRUE}, then after date selection, datepicker will be closed.}
 
@@ -118,8 +147,6 @@ An alternative to \code{dateInput} to select single, multiple or date range.
 This widget prevents \code{dateInput} from working, don't use both !
 }
 \examples{
-\dontrun{
-
 if (interactive()) {
 
 # examples of different options to select dates:
@@ -155,9 +182,6 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 
 }
-
-}
-
 }
 \seealso{
 See \code{\link{updateAirDateInput}} for updating slider value server-side.

@@ -25,7 +25,7 @@ test_that("insertUI Sweet Alert", {
   dep_sw <- session$lastInsertUI$content$deps
 
   expect_true(grepl(pattern = "sw-sa-deps", x = tag_sw))
-  expect_length(dep_sw, 2)
+  expect_length(dep_sw, 1)
 })
 
 
@@ -56,12 +56,12 @@ test_that("sendSweetAlert", {
 
   sendSA_msg <- session$lastCustomMessage$message
 
-  expect_length(sendSA_msg, 10)
-  expect_identical(sendSA_msg$title, "TITLE")
-  expect_is(sendSA_msg$text, "character")
-  expect_identical(sendSA_msg$type, "success")
+  expect_length(sendSA_msg, 2)
+  expect_identical(sendSA_msg$config$title, "TITLE")
+  expect_is(sendSA_msg$config$text, "character")
+  expect_identical(sendSA_msg$config$type, "success")
   expect_false(sendSA_msg$as_html)
-  expect_true(sendSA_msg$allowOutsideClick)
+  expect_true(sendSA_msg$config$allowOutsideClick)
 })
 
 
@@ -93,10 +93,10 @@ test_that("confirmSweetAlert", {
   sendCA_msg <- session$lastCustomMessage$message
 
   expect_identical(sendCA_msg$id, "MY_CONFIRMATION")
-  expect_length(sendCA_msg, 10)
-  expect_identical(sendCA_msg$title, "TITLE")
-  expect_is(sendCA_msg$text, "character")
-  expect_identical(sendCA_msg$type, "success")
+  expect_length(sendCA_msg, 3)
+  expect_identical(sendCA_msg$swal$title, "TITLE")
+  expect_is(sendCA_msg$swal$text, "character")
+  expect_identical(sendCA_msg$swal$type, "success")
 })
 
 
@@ -129,9 +129,9 @@ test_that("inputSweetAlert", {
   sendIA_msg <- session$lastCustomMessage$message
 
   expect_identical(sendIA_msg$id, "MY_INPUT")
-  expect_length(sendIA_msg, 7)
-  expect_identical(sendIA_msg$title, "TITLE")
-  expect_is(sendIA_msg$text, "json")
+  expect_length(sendIA_msg, 3)
+  expect_identical(sendIA_msg$swal$title, "TITLE")
+  expect_is(sendIA_msg$swal$text, "json")
 })
 
 
@@ -164,7 +164,7 @@ test_that("progressSweetAlert", {
 
   sendPA_msg <- session$lastCustomMessage$message
 
-  expect_length(sendPA_msg, 9)
-  expect_null(sendPA_msg$title)
-  expect_false(sendPA_msg$allowOutsideClick)
+  expect_length(sendPA_msg, 3)
+  expect_null(sendPA_msg$config$title)
+  expect_false(sendPA_msg$config$allowOutsideClick)
 })
