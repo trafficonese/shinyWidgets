@@ -38,6 +38,7 @@ Imports:
     htmltools,
     jsonlite,
     grDevices,
+    R.utils,
     scales
 License: GPL-3 | file LICENSE
 Encoding: UTF-8

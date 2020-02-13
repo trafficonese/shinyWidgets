@@ -4,16 +4,8 @@
 \alias{multiInput}
 \title{Create a multiselect input control}
 \usage{
-multiInput(
-  inputId,
-  label,
-  choices = NULL,
-  selected = NULL,
-  options = NULL,
-  width = NULL,
-  choiceNames = NULL,
-  choiceValues = NULL
-)
+multiInput(inputId, label, choices = NULL, selected = NULL,
+  options = NULL, width = NULL, choiceNames = NULL, choiceValues = NULL)
 }
 \arguments{
 \item{inputId}{The \code{input} slot that will be used to access the value.}

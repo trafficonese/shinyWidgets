@@ -4,14 +4,8 @@
 \alias{updatePickerInput}
 \title{Change the value of a select picker input on the client}
 \usage{
-updatePickerInput(
-  session,
-  inputId,
-  label = NULL,
-  selected = NULL,
-  choices = NULL,
-  choicesOpt = NULL
-)
+updatePickerInput(session, inputId, label = NULL, selected = NULL,
+  choices = NULL, choicesOpt = NULL)
 }
 \arguments{
 \item{session}{The session object passed to function given to shinyServer.}

@@ -70,18 +70,17 @@ pickerInput <- function(inputId, label = NULL, choices, selected = NULL, multipl
     options <- c(options, list("data-width" = width))
   if (!is.null(width) && width %in% c("fit"))
     width <- NULL
-  options <- lapply(options, function(x) {
-    if (identical(x, TRUE))
-      "true"
-    else if (identical(x, FALSE))
-      "false"
-    else x
-  })
+  # options <- lapply(options, function(x) {
+  #   if (identical(x, TRUE))
+  #     "true"
+  #   else if (identical(x, FALSE))
+  #     "false"
+  #   else x
+  # })
   maxOptGroup <- options[["data-max-options-group"]]
 
-  selectTag <- tag("select", dropNulls(options))
   selectTag <- tagAppendAttributes(
-    tag = selectTag,
+    tag = tag("select", dropNulls(options)),
     id = inputId,
     class = "selectpicker form-control"
   )
@@ -128,7 +127,7 @@ pickerInput <- function(inputId, label = NULL, choices, selected = NULL, multipl
 #'
 #' @seealso \link{pickerInput}.
 #'
-#' @importFrom utils capture.output
+#' @importFrom R.utils captureOutput
 #' @export
 #'
 #' @examples
@@ -204,7 +203,7 @@ pickerInput <- function(inputId, label = NULL, choices, selected = NULL, multipl
 #' shinyApp(ui = ui, server = server)
 #'
 #' }
-updatePickerInput <- function (session, inputId, label = NULL,
+updatePickerInput <- function(session, inputId, label = NULL,
                                selected = NULL, choices = NULL,
                                choicesOpt = NULL) {
   choices <- if (!is.null(choices))
@@ -212,11 +211,8 @@ updatePickerInput <- function (session, inputId, label = NULL,
   if (!is.null(selected))
     selected <- validateSelected(selected, choices, inputId)
   choices <- if (!is.null(choices))
-    paste(capture.output(pickerSelectOptions(choices, selected, choicesOpt)), collapse = "\n")
-  options = NULL
-  if (!is.null(options))
-    names(options) <- paste0("data-", names(options))
-  message <- dropNulls(list(label = label, choices = choices, value = selected, options = options))
+    paste(captureOutput(pickerSelectOptions(choices, selected, choicesOpt)), collapse = "\n")
+  message <- dropNulls(list(label = label, choices = choices, value = selected))
   session$sendInputMessage(inputId, message)
 }
 
@@ -279,14 +275,15 @@ pickerSelectOptions <- function(choices, selected = NULL, choicesOpt = NULL, max
   return(tagList(html))
 }
 
+
 # From shiny/input-select.R, faster alternative if no choice options specific to picker
-selectOptions <- function(choices, selected = NULL) {
+selectOptions_old <- function(choices, selected = NULL) {
   html <- mapply(choices, names(choices), FUN = function(choice, label) {
     if (is.list(choice)) {
       sprintf(
         '<optgroup label="%s">\n%s\n</optgroup>',
         htmlEscape(label, TRUE),
-        selectOptions(choice, selected)
+        selectOptions_old(choice, selected)
       )
 
     } else {
@@ -301,3 +298,87 @@ selectOptions <- function(choices, selected = NULL) {
   HTML(paste(html, collapse = '\n'))
 }
 
+selectOptions <- function(choices, selected = NULL){
+
+  # initial vector to store output character strings
+  html           <- vector("character", length(choices))
+
+  # indicating where to update list elements
+  is_list_choice <- vapply(choices, is.list, logical(1L))
+
+  # apply function ON list choices and add back to html
+  if(any(is_list_choice)){
+    list_choices   <- choices[is_list_choice]
+    list_html      <- sprintf(
+      fmt = '<optgroup label="%s">\n%s\n</optgroup>',
+      htmlEscape(text      = names(list_choices),
+                            attribute = TRUE),
+      vapply(list_choices, selectOptions, character(1L), selected = selected)
+    )
+    html[is_list_choice] <- list_html
+  }
+
+  # run on just vector choices and put back into html
+  if(any(!is_list_choice)){
+    vec_choices <- choices[!is_list_choice]
+    vec_html    <- sprintf(
+      fmt = '<option value="%s"%s>%s</option>',
+      htmltools::htmlEscape(text      = vec_choices,
+                            attribute = TRUE),
+      c("", " selected")[(vec_choices %in% selected) + 1],
+      htmlEscape(names(vec_choices))
+    )
+    html[!is_list_choice] <- vec_html
+  }
+
+  # paste everything together
+  htmltools::HTML(paste(html, collapse = "\n"))
+}
+
+
+# library(htmltools)
+# choic = list(`Baustelle 1` = "Baustelle 1", `Baustelle 2` = "Baustelle 2",
+#              `Baustelle 3` = "Baustelle 3", `Baustelle 4` = "Baustelle 4",
+#              `Baustelle 5` = "Baustelle 5")
+# choic = rep(choic, 10000)
+# selected = ""
+# my_check <- function(values) {all(sapply(values[-1], function(x) identical(values[[1]], x)))}
+# mc <- microbenchmark::microbenchmark(times=10,check = my_check,
+#   a = selectOptions(choic, selected),
+#   b = selectOptions_old(choic, selected)
+# ); mc
+# Unit: milliseconds
+# expr      min        lq      mean    median        uq      max neval
+# a 108.3126  113.1884  115.8493  116.1498  118.1989  124.957    10
+# b 998.3877 1014.1348 1059.0022 1033.0532 1115.0072 1151.026    10
+
+
+# choic = list(`Baustelle 1` = "Baustelle 1", `Baustelle 2` = "Baustelle 2",
+#              `Baustelle 3` = "Baustelle 3", `Baustelle 4` = "Baustelle 4",
+#              `Baustelle 5` = "Baustelle 5")
+# choic = rep(choic, 1000)
+# choicesOpt = NULL
+# library("R.utils")
+# length(choic)
+# # a=paste(capture.output(pickerSelectOptions(choic, selected, choicesOpt)), collapse = "\n")
+# # b=paste(captureOutput(pickerSelectOptions(choic, selected, choicesOpt)), collapse = "\n")
+# my_check <- function(values) {all(sapply(values[-1], function(x) identical(values[[1]], x)))}
+# mc <- microbenchmark::microbenchmark(times=10, check = my_check,
+#    a = paste(capture.output(pickerSelectOptions(choic, selected, choicesOpt)), collapse = "\n"),
+#    b = paste(captureOutput(pickerSelectOptions(choic, selected, choicesOpt)), collapse = "\n")
+# ); mc
+# length(choic)
+# [1] 50000
+# Unit: milliseconds
+# expr       min        lq      mean    median        uq        max neval
+# a 6528.5436 6576.3651 7186.7423 6701.1438 7103.8297 10670.9440    10
+# b  154.8702  156.3402  160.4324  159.6285  163.0981   168.5681    10
+# 42.15494 times faster
+
+# length(choic)
+# [1] 5000
+# Unit: milliseconds
+# expr     min      lq     mean  median      uq     max neval
+# a 64.4707 67.3912 77.59479 76.0203 81.1139 99.7371    10
+# b 15.4270 15.4865 15.93885 15.5637 15.6274 18.3188    10
+# 4 times faster

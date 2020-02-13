@@ -6,14 +6,8 @@
 \alias{pickerGroupServer}
 \title{Picker Group}
 \usage{
-pickerGroupUI(
-  id,
-  params,
-  label = NULL,
-  btn_label = "Reset filters",
-  options = list(),
-  inline = TRUE
-)
+pickerGroupUI(id, params, label = NULL, btn_label = "Reset filters",
+  options = list(), inline = TRUE)
 
 pickerGroupServer(input, output, session, data, vars)
 }

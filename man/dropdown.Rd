@@ -4,20 +4,9 @@
 \alias{dropdown}
 \title{Dropdown}
 \usage{
-dropdown(
-  ...,
-  style = "default",
-  status = "default",
-  size = "md",
-  icon = NULL,
-  label = NULL,
-  tooltip = FALSE,
-  right = FALSE,
-  up = FALSE,
-  width = NULL,
-  animate = FALSE,
-  inputId = NULL
-)
+dropdown(..., style = "default", status = "default", size = "md",
+  icon = NULL, label = NULL, tooltip = FALSE, right = FALSE,
+  up = FALSE, width = NULL, animate = FALSE, inputId = NULL)
 }
 \arguments{
 \item{...}{List of tag to be displayed into the dropdown menu.}

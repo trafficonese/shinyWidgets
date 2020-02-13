@@ -4,17 +4,8 @@
 \alias{numericInputIcon}
 \title{Create a numeric input control with icon(s)}
 \usage{
-numericInputIcon(
-  inputId,
-  label,
-  value,
-  min = NULL,
-  max = NULL,
-  step = NULL,
-  icon = NULL,
-  size = NULL,
-  width = NULL
-)
+numericInputIcon(inputId, label, value, min = NULL, max = NULL,
+  step = NULL, icon = NULL, size = NULL, width = NULL)
 }
 \arguments{
 \item{inputId}{The \code{input} slot that will be used to access the value.}
@@ -36,7 +27,7 @@ or text, to be displayed on the right or left of the numeric input.}
 be \code{"sm"} (small) or \code{"lg"} (large).}
 
 \item{width}{The width of the input, e.g. \code{'400px'}, or \code{'100\%'};
-see \code{\link[shiny:validateCssUnit]{validateCssUnit()}}.}
+see \code{\link[=validateCssUnit]{validateCssUnit()}}.}
 }
 \value{
 A numeric input control that can be added to a UI definition.

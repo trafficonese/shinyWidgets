@@ -4,9 +4,8 @@
 \alias{useSweetAlert}
 \title{Load Sweet Alert dependencies}
 \usage{
-useSweetAlert(
-  theme = c("sweetalert2", "minimal", "dark", "bootstrap-4", "borderless")
-)
+useSweetAlert(theme = c("sweetalert2", "minimal", "dark", "bootstrap-4",
+  "borderless"))
 }
 \arguments{
 \item{theme}{Theme to modify alerts appearance.}
