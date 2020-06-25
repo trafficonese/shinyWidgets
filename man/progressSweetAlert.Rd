@@ -4,8 +4,17 @@
 \alias{progressSweetAlert}
 \title{Progress bar in a sweet alert}
 \usage{
-progressSweetAlert(session, id, value, total = NULL, display_pct = FALSE,
-  size = NULL, status = NULL, striped = FALSE, title = NULL)
+progressSweetAlert(
+  session,
+  id,
+  value,
+  total = NULL,
+  display_pct = FALSE,
+  size = NULL,
+  status = NULL,
+  striped = FALSE,
+  title = NULL
+)
 }
 \arguments{
 \item{session}{The \code{session} object passed to function given to shinyServer.}
@@ -38,7 +47,7 @@ library("shinyWidgets")
 
 ui <- fluidPage(
   tags$h1("Progress bar in Sweet Alert"),
-  useSweetAlert(), # /!\\ needed with 'progressSweetAlert'
+  useSweetAlert(), # /!\ needed with 'progressSweetAlert'
   actionButton(
     inputId = "go",
     label = "Launch long calculation !"

@@ -4,8 +4,15 @@
 \alias{textInputIcon}
 \title{Create a text input control with icon(s)}
 \usage{
-textInputIcon(inputId, label, value = "", placeholder = NULL, icon = NULL,
-  size = NULL, width = NULL)
+textInputIcon(
+  inputId,
+  label,
+  value = "",
+  placeholder = NULL,
+  icon = NULL,
+  size = NULL,
+  width = NULL
+)
 }
 \arguments{
 \item{inputId}{The \code{input} slot that will be used to access the value.}
@@ -25,7 +32,7 @@ or text, to be displayed on the right or left of the text input.}
 be \code{"sm"} (small) or \code{"lg"} (large).}
 
 \item{width}{The width of the input, e.g. \code{'400px'}, or \code{'100\%'};
-see \code{\link[=validateCssUnit]{validateCssUnit()}}.}
+see \code{\link[shiny:validateCssUnit]{validateCssUnit()}}.}
 }
 \value{
 A text input control that can be added to a UI definition.

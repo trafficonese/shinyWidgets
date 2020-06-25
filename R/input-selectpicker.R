@@ -16,6 +16,7 @@
 #' @param choicesOpt Options for choices in the dropdown menu.
 #' @param width The width of the input : 'auto', 'fit', '100px', '75\%'.
 #' @param inline Put the label and the picker on the same line.
+#' @param selectontop Should selected options appear on top of the dropdown. Default is FALSE
 #'
 #' @seealso \link{updatePickerInput} to update value server-side.
 #'
@@ -61,7 +62,8 @@
 #'
 #' @export
 pickerInput <- function(inputId, label = NULL, choices, selected = NULL, multiple = FALSE,
-                        options = list(), choicesOpt = NULL, width = NULL, inline = FALSE) {
+                        options = list(), choicesOpt = NULL, width = NULL, inline = FALSE,
+                        selectontop = FALSE) {
   choices <- choicesWithNames(choices)
   selected <- restoreInput(id = inputId, default = selected)
   if (!is.null(options) && length(options) > 0)
@@ -90,6 +92,11 @@ pickerInput <- function(inputId, label = NULL, choices, selected = NULL, multipl
 
   if (multiple)
     selectTag$attribs$multiple <- "multiple"
+
+
+  selectTag$attribs$selectontop <- selectontop
+
+
   divClass <- "form-group shiny-input-container"
   labelClass <- "control-label"
   if (inline) {

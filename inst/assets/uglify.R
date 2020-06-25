@@ -31,7 +31,7 @@ bindings_files <- paste(unlist(bindings_files), collapse = "\n")
 library("js")
 bindings_files <- uglify_optimize(text = bindings_files)
 
-writeLines(text = bindings_files, con = "inst/www/shinyWidgets-bindings.min.js")
+writeLines(text = bindings_files, con = "inst/assets/shinyWidgets-bindings.min.js")
 
 
 
