@@ -10,8 +10,11 @@ appendVerticalTab(inputId, tab, session = shiny::getDefaultReactiveDomain())
 
 removeVerticalTab(inputId, index, session = shiny::getDefaultReactiveDomain())
 
-reorderVerticalTabs(inputId, newOrder,
-  session = shiny::getDefaultReactiveDomain())
+reorderVerticalTabs(
+  inputId,
+  newOrder,
+  session = shiny::getDefaultReactiveDomain()
+)
 }
 \arguments{
 \item{inputId}{The id of the \code{verticalTabsetPanel} object.}

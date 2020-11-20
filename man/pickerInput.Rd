@@ -4,9 +4,18 @@
 \alias{pickerInput}
 \title{Select picker Input Control}
 \usage{
-pickerInput(inputId, label = NULL, choices, selected = NULL,
-  multiple = FALSE, options = list(), choicesOpt = NULL, width = NULL,
-  inline = FALSE)
+pickerInput(
+  inputId,
+  label = NULL,
+  choices,
+  selected = NULL,
+  multiple = FALSE,
+  options = list(),
+  choicesOpt = NULL,
+  width = NULL,
+  inline = FALSE,
+  selectontop = FALSE
+)
 }
 \arguments{
 \item{inputId}{The \code{input} slot that will be used to access the value.}
@@ -30,6 +39,8 @@ To limit the number of selection possible, see example below.}
 \item{width}{The width of the input : 'auto', 'fit', '100px', '75\%'.}
 
 \item{inline}{Put the label and the picker on the same line.}
+
+\item{selectontop}{Should selected options appear on top of the dropdown. Default is FALSE}
 }
 \value{
 A select control that can be added to a UI definition.
