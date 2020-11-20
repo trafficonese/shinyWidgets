@@ -16,6 +16,7 @@
 #' @param choicesOpt Options for choices in the dropdown menu.
 #' @param width The width of the input : 'auto', 'fit', '100px', '75\%'.
 #' @param inline Put the label and the picker on the same line.
+#' @param selectontop Should selected options appear on top of the dropdown. Default is FALSE
 #'
 #' @seealso \link{updatePickerInput} to update value server-side.
 #'
@@ -61,7 +62,8 @@
 #'
 #' @export
 pickerInput <- function(inputId, label = NULL, choices, selected = NULL, multiple = FALSE,
-                        options = list(), choicesOpt = NULL, width = NULL, inline = FALSE) {
+                        options = list(), choicesOpt = NULL, width = NULL, inline = FALSE,
+                        selectontop = FALSE) {
   choices <- choicesWithNames(choices)
   selected <- restoreInput(id = inputId, default = selected)
   if (!is.null(options) && length(options) > 0)
@@ -70,13 +72,6 @@ pickerInput <- function(inputId, label = NULL, choices, selected = NULL, multipl
     options <- c(options, list("data-width" = width))
   if (!is.null(width) && width %in% c("fit"))
     width <- NULL
-  # options <- lapply(options, function(x) {
-  #   if (identical(x, TRUE))
-  #     "true"
-  #   else if (identical(x, FALSE))
-  #     "false"
-  #   else x
-  # })
   maxOptGroup <- options[["data-max-options-group"]]
 
   selectTag <- tagAppendAttributes(
@@ -92,6 +87,7 @@ pickerInput <- function(inputId, label = NULL, choices, selected = NULL, multipl
     selectTag$attribs$multiple <- "multiple"
   divClass <- "form-group shiny-input-container"
   labelClass <- "control-label"
+  selectTag$attribs$selectontop <- selectontop
   if (inline) {
     divClass <- paste(divClass, "form-horizontal")
     selectTag <- tags$div(class="col-sm-10", selectTag)

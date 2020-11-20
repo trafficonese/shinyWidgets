@@ -64,6 +64,12 @@ var pickerInputBinding = new Shiny.InputBinding();
         //$(el).selectpicker('refresh');
         callback();
       });
+      $(el).on('hidden.bs.select', function (event) {
+        if ($(el).attr("selectontop") === "TRUE") {
+          $('#'+el.id+' option:selected').prependTo('#'+el.id);
+          $(el).selectpicker('refresh');
+        }
+      });
     },
     unsubscribe: function unsubscribe(el) {
       $(el).off('.pickerInputBinding');
