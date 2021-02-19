@@ -12,18 +12,20 @@ attachShinyWidgetsDep <- function(tag, widget = NULL) {
   version <- as.character(packageVersion("shinyWidgets")[[1]])
   dep <- htmltools::htmlDependency(
     name = "shinyWidgets", version = version,
-    src = c(href = "shinyWidgets"),
+    src = c(href = "shinyWidgets", file = "assets"),
+    package = "shinyWidgets",
     script = "shinyWidgets-bindings.min.js",
-    stylesheet = "shinyWidgets.css"
+    stylesheet = "shinyWidgets.min.css"
   )
   if (!is.null(widget)) {
     if (widget == "picker") {
       dep <- list(
         dep,
         htmltools::htmlDependency(
-          name = "selectPicker",
-          version = "1.13.12",
-          src = c(href="shinyWidgets/selectPicker"),
+          name = "bootstrap-select",
+          version = "1.13.18",
+          package = "shinyWidgets",
+          src = c(href = "shinyWidgets/bootstrap-select", file = "assets/bootstrap-select"),
           script = "js/bootstrap-select.min.js",
           stylesheet = "css/bootstrap-select.min.css"
         )
